@@ -7,8 +7,19 @@ const authRouter = require("./routes/auth/index")
 const express = require('express');
 const app = express();
 connectToDB();
+
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://192.168.189.55:5173'
+  ];
 app.use(cors({
-    origin:'http://localhost:5173',
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
     methods:['GET','POST','PUT','DELETE'],
     allowedHeaders:[
         'Content-Type',

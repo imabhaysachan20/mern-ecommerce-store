@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const {registerController,loginControllers,authMiddleware,logoutController} = require("../../controllers/auth/index")
-router.post("/register",registerController)
+router.post("/register",registerController);
 router.post("/login",loginControllers);
 router.post("/logout",logoutController)
 router.get("/checkauth",authMiddleware,(req,res)=>{
