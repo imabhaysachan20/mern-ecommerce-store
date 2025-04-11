@@ -4,6 +4,7 @@ const helmet = require('helmet')
 const connectToDB = require('./db/connect')
 const cors = require('cors')
 const authRouter = require("./routes/auth/index")
+const adminProductsRouter = require("./routes/admin/products")
 const express = require('express');
 const app = express();
 connectToDB();
@@ -41,6 +42,7 @@ const PORT = process.env.PORT || 5000;
 
 
 app.use("/api/auth",authRouter);
+app.use("/api/admin/products",adminProductsRouter);
 
 app.listen(PORT,()=>{
     console.log("Server ruuning on port ", PORT)
