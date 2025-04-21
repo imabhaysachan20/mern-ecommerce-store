@@ -55,7 +55,8 @@ const loginControllers = async(req,res,next)=>{
         const token = jwt.sign({
             username:user.username,
             email:user.email,
-            role:user.role
+            role:user.role,
+            userName:user.username
         },process.env.JWT_SECRET,{expiresIn:'30m'})
 
         return res.cookie("token",token,{httpOnly:true,secure:false,expires: new Date(Date.now() + 24 * 60 * 60 * 1000)}).json({success:true,

@@ -5,6 +5,9 @@ const connectToDB = require('./db/connect')
 const cors = require('cors')
 const authRouter = require("./routes/auth/index")
 const adminProductsRouter = require("./routes/admin/products")
+const shopproductRouter = require("./routes/shop/product")
+const shopcartRouter = require("./routes/shop/cart")
+
 const express = require('express');
 const app = express();
 connectToDB();
@@ -21,7 +24,7 @@ app.use(cors({
           callback(new Error('Not allowed by CORS'));
         }
       },
-    methods:['GET','POST','PUT','DELETE'],
+    methods:['GET','POST','PUT','DELETE','PATCH'],
     allowedHeaders:[
         'Content-Type',
         'Authorization',
@@ -43,7 +46,8 @@ const PORT = process.env.PORT || 5000;
 
 app.use("/api/auth",authRouter);
 app.use("/api/admin/products",adminProductsRouter);
-
-app.listen(PORT,()=>{
+app.use("/api/shop",shopproductRouter)
+app.use("/api/shop/cart",shopcartRouter)
+app.listen(PORT,()=>{ 
     console.log("Server ruuning on port ", PORT)
 })
